@@ -54,10 +54,8 @@ package MKTools
 
 		private function addChild(child:DisplayObject):DisplayObject
 		{
-			if (_stage)
-			{
-				return _stage.addChild(child);
-			}
+			if (_stage) return _stage.addChild(child);
+			return null;
 		}
 
 		private function onDown(e:TouchEvent):void
@@ -65,6 +63,7 @@ package MKTools
 			if (!isClicked(e)) return;
 			_target.y += 1;
 			row('.x =', _target.x, '.y =', _target.y);
+			mtr(1, '.x =', _target.x, '.y =', _target.y);
 		}
 
 		private function onTop(e:TouchEvent):void
@@ -72,6 +71,7 @@ package MKTools
 			if (!isClicked(e)) return;
 			_target.y -= 1;
 			row('.x =', _target.x, '.y =', _target.y);
+			mtr(1, '.x =', _target.x, '.y =', _target.y);
 		}
 
 		private function onRight(e:TouchEvent):void
@@ -79,6 +79,7 @@ package MKTools
 			if (!isClicked(e)) return;
 			_target.x += 1;
 			row('.x =', _target.x, '.y =', _target.y);
+			mtr(1, '.x =', _target.x, '.y =', _target.y);
 		}
 
 		private function onLeft(e:TouchEvent):void
@@ -86,15 +87,14 @@ package MKTools
 			if (!isClicked(e)) return;
 			_target.x -= 1;
 			row('.x =', _target.x, '.y =', _target.y);
+			mtr(1, '.x =', _target.x, '.y =', _target.y);
 		}
 
 		private function isClicked(e:TouchEvent):Boolean
 		{
 			var t:Touch = e.touches[0];
 			if (t == null || t.target == null || t.phase != TouchPhase.ENDED)
-			{
 				return false;
-			}
 			return true;
 		}
 	}
