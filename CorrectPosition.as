@@ -1,34 +1,29 @@
 package MKTools
 {
 	import starling.display.DisplayObject;
-	import starling.display.DisplayObjectContainer;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.text.TextField;
-	import starling.utils.HAlign;
 
 	import ui.Container;
 
 	public class CorrectPosition
 	{
-		private var logger:TextField = new TextField(100, 20, '');
-		private function row(...cols): void
+		private function row(...cols):void
 		{
-			logger.text = cols.join(",") + "\n";
+			TraceOnStage.trace_to(_stage, cols);
 		}
 
 		private var _target:Container;
+		private var _stage:Sprite;
 
-		public function CorrectPosition(container:Sprite, target:Container)
+		public function CorrectPosition(stage:Sprite, target:Container)
 		{
+			_stage = stage;
 			_target = target;
-			logger.hAlign = HAlign.LEFT;
-			logger.autoScale = true;
-			addChild(logger);
-			
+
 			var height:int = 30;
 			var width:int = 30;
 
@@ -59,9 +54,9 @@ package MKTools
 
 		private function addChild(child:DisplayObject):DisplayObject
 		{
-			if (_target)
+			if (_stage)
 			{
-				return _target.addChild(child);
+				return _stage.addChild(child);
 			}
 		}
 
@@ -69,28 +64,28 @@ package MKTools
 		{
 			if (!isClicked(e)) return;
 			_target.y += 1;
-			mtr(1, '.x =', _target.x, '.y =' , _target.y);
+			row('.x =', _target.x, '.y =', _target.y);
 		}
 
 		private function onTop(e:TouchEvent):void
 		{
 			if (!isClicked(e)) return;
 			_target.y -= 1;
-			mtr(1, '.x =', _target.x, '.y =' , _target.y);
+			row('.x =', _target.x, '.y =', _target.y);
 		}
 
 		private function onRight(e:TouchEvent):void
 		{
 			if (!isClicked(e)) return;
 			_target.x += 1;
-			mtr(1, '.x =', _target.x, '.y =' , _target.y);
+			row('.x =', _target.x, '.y =', _target.y);
 		}
 
 		private function onLeft(e:TouchEvent):void
 		{
 			if (!isClicked(e)) return;
 			_target.x -= 1;
-			mtr(1, '.x =', _target.x, '.y =' , _target.y);
+			row('.x =', _target.x, '.y =', _target.y);
 		}
 
 		private function isClicked(e:TouchEvent):Boolean

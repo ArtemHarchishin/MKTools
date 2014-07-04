@@ -18,9 +18,9 @@ package MKTools
 			{
 				logger = (queue[stage] as TextField);
 				if (logger.text.length > 150) logger.text = '';
-				logger.text += rest.join(':') + ';';
+				logger.text += rest.join(',') + ';';
 			} else {
-				logger = new TextField(stage.width / 2, 40, rest.join(':'),"Verdana", 40, 0xffffff, true);
+				logger = new TextField(stage.width / 2, 50, rest.join(','),"Verdana", 40, 0xffffff, true);
 				logger.border = true;
 				logger.touchable = false;
 				stage.addChild(logger);
