@@ -5,8 +5,6 @@ package MKTools
 	import starling.display.DisplayObjectContainer;
 	import starling.text.TextField;
 
-	import text.TextFieldUni;
-
 	public class TraceOnStage
 	{
 		private static const queue:Dictionary = new Dictionary(true);
