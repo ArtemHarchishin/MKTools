@@ -1,13 +1,14 @@
 package MKTools
 {
+	import flash.utils.setTimeout;
+
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-
-	import ui.Container;
 
 	public class CorrectPosition
 	{
@@ -16,10 +17,10 @@ package MKTools
 			TraceOnStage.trace_to(_stage, cols);
 		}
 
-		private var _target:Container;
+		private var _target:DisplayObjectContainer;
 		private var _stage:Sprite;
 
-		public function CorrectPosition(stage:Sprite, target:Container)
+		public function CorrectPosition(stage:Sprite, target:DisplayObjectContainer)
 		{
 			_stage = stage;
 			_target = target;
@@ -96,6 +97,32 @@ package MKTools
 			if (t == null || t.target == null || t.phase != TouchPhase.ENDED)
 				return false;
 			return true;
+		}
+
+		private static var counter:int = 0;
+
+		public static function delayInit(stage:Sprite, target:DisplayObjectContainer):void
+		{
+			if (stage.parent == null)
+			{
+				if (counter >= 20)
+				{
+					counter = 0;
+					return;
+				}
+
+				setTimeout(function ()
+				{
+					delayInit(stage, target);
+				}, 1000);
+
+				counter++;
+
+				return;
+			} else
+			{
+				new CorrectPosition(stage, target);
+			}
 		}
 	}
 }

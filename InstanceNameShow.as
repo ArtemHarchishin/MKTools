@@ -7,8 +7,10 @@ package MKTools
 
 	public class InstanceNameShow
 	{
-		public function InstanceNameShow(resource:DisplayObjectContainer, show_all:* = 1)
+		private var _downVisible:Boolean;
+		public function InstanceNameShow(resource:DisplayObjectContainer, downVisible:Boolean = false, show_all:* = 1)
 		{
+			_downVisible = downVisible;
 			resource.addEventListener(TouchEvent.TOUCH, onFingerTouch);
 			mtr(1, resource.name + " numChildren = " + resource.numChildren);
 			if (show_all) show_all_children(resource, 0);
@@ -40,6 +42,7 @@ package MKTools
 
 			trace('---', t.target, t.target.name);
 			var parent:DisplayObjectContainer = t.target.parent;
+			if (_downVisible) t.target.visible = false;
 			var i:int = 0;
 			while (parent)
 			{
