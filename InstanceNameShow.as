@@ -40,13 +40,14 @@ package MKTools
 				return;
 			}
 
-			trace('---', t.target, t.target.name);
+			trace('---', t.target, t.target.name, t.target.hasOwnProperty('text') ? 'text=' + t['text'] : '');
 			var parent:DisplayObjectContainer = t.target.parent;
 			if (_downVisible) t.target.visible = false;
 			var i:int = 0;
 			while (parent)
 			{
-				trace(get_tab(i) + parent, parent.name, parent.numChildren);
+
+				trace(get_tab(i) + parent, parent.name, parent.numChildren, parent.hasOwnProperty('text') ? 'text=' + t['text'] : '');
 				parent = parent.parent;
 				i++;
 			}
