@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="mktools_config_runner" basedir="D:\Projects\zombieranch\front_end" default="desktop">
+
+	<property environment="env"/>
+	<property name="file_name_buildOneSWF" value="correct_buildOneSWF.py"/>
+	<property name="file_name_MobileANT_iOS" value="correct_MobileANT_iOS_.py"/>
+
+	<include file="${basedir}\buildOneSWF.xml" as="buildOneSWF"/>
+	<include file="${basedir}\MobileANT_iOS_ru.xml" as="MobileANT_iOS_ru"/>
+	<include file="${basedir}\MobileANT_iOS_int.xml" as="MobileANT_iOS_int"/>
+
+	<target name="desktop" depends="py_script_desktop, buildOneSWF.copy_to_bin_debug, buildOneSWF.build All : debug"/>
+
+	<target name="ru_ios_with_emul" depends="py_script_ru_fast, py_script_ru_ios_with_emul, buildOneSWF.copy_to_bin_debug, buildOneSWF.build All : debug, MobileANT_iOS_ru.main"/>
+	<target name="int_ios_with_emul" depends="py_script_int_fast, py_script_int_ios_with_emul, buildOneSWF.copy_to_bin_debug, buildOneSWF.build All : debug, MobileANT_iOS_int.main"/>
+
+	<target name="ru_ios_non_emulate" depends="py_script_ru_fast, py_script_ru_ios_non_emulate, buildOneSWF.copy_to_bin_debug, buildOneSWF.build All : debug, MobileANT_iOS_ru.main"/>
+	<target name="int_ios_non_emulate" depends="py_script_int_fast, py_script_int_ios_non_emulate, buildOneSWF.copy_to_bin_debug, buildOneSWF.build All : debug, MobileANT_iOS_int.main"/>
+
+	<target name="ru_ios_non_emulate_non_fast" depends="py_script_ru_non_fast, py_script_ru_ios_non_emulate, buildOneSWF.copy_to_bin_debug, buildOneSWF.build All : debug, MobileANT_iOS_ru.main"/>
+	<target name="int_ios_non_emulate_non_fast" depends="py_script_int_non_fast, py_script_int_ios_non_emulate, buildOneSWF.copy_to_bin_debug, buildOneSWF.build All : debug, MobileANT_iOS_int.main"/>
+
+	<target name="py_script_int_non_fast">
+		<exec executable="${env.PYTHON_HOME}/python.exe">
+			<arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
+			<arg value="not_fast_compile_int"/>
+  		</exec>
+	</target>
+
+	<target name="py_script_ru_non_fast">
+		<exec executable="${env.PYTHON_HOME}/python.exe">
+			<arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
+			<arg value="not_fast_compile_ru"/>
+  		</exec>
+	</target>
+
+	<target name="py_script_int_fast">
+		<exec executable="${env.PYTHON_HOME}/python.exe">
+			<arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
+			<arg value="fast_compile_int"/>
+  		</exec>
+	</target>
+
+	<target name="py_script_ru_fast">
+		<exec executable="${env.PYTHON_HOME}/python.exe">
+			<arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
+			<arg value="fast_compile_ru"/>
+  		</exec>
+	</target>
+
+	<target name="py_script_desktop">
+		<exec executable="${env.PYTHON_HOME}/python.exe">
+			<arg value="${basedir}\src\MKTools\${file_name_buildOneSWF}"/>
+			<arg value="desktop"/>
+  		</exec>
+  	</target>
+
+  	<target name="py_script_ru_ios_with_emul">
+		<exec executable="${env.PYTHON_HOME}/python.exe">
+			<arg value="${basedir}\src\MKTools\${file_name_buildOneSWF}"/>
+			<arg value="ru_ios"/>
+  		</exec>
+  	</target>
+
+	<target name="py_script_int_ios_with_emul">
+		<exec executable="${env.PYTHON_HOME}/python.exe">
+			<arg value="${basedir}\src\MKTools\${file_name_buildOneSWF}"/>
+			<arg value="int_ios"/>
+  		</exec>	
+	</target>
+
+	<target name="py_script_ru_ios_non_emulate">
+		<exec executable="${env.PYTHON_HOME}/python.exe">
+			<arg value="${basedir}\src\MKTools\${file_name_buildOneSWF}"/>
+			<arg value="ru_ios_non_emulate"/>
+  		</exec>	
+	</target>
+
+	<target name="py_script_int_ios_non_emulate">
+		<exec executable="${env.PYTHON_HOME}/python.exe">
+			<arg value="${basedir}\src\MKTools\${file_name_buildOneSWF}"/>
+			<arg value="int_ios_non_emulate"/>
+  		</exec>	
+	</target>
+
+</project>
