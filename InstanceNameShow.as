@@ -40,7 +40,7 @@ package MKTools
 				return;
 			}
 
-			trace('---', t.target, t.target.name, t.target.hasOwnProperty('text') ? 'text=' + t['text'] : '');
+			trace('---', t.target, t.target.name, t.target.hasOwnProperty('text') ? 'text=' + t.target['text'] : '');
 			var parent:DisplayObjectContainer = t.target.parent;
 			if (_downVisible) t.target.visible = false;
 			var i:int = 0;

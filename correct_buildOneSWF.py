@@ -47,6 +47,7 @@ configs = {'config.debug':              {A: 'true',  B: 'true',  C: 'true',  D: 
            'config.android':            {A: 'true',  B: 'false', C: 'false', D: 'false', E: 'false'},
            'config.ios':                {A: 'false', B: 'true',  C: 'true',  D: 'true',  E: 'true'},
            'config.emulator':           {A: 'true',  B: 'true',  C: 'true',  D: 'false', E: 'false'},
+           'config.profilerTest':       {A: 'false', B: 'false', C: 'false', D: 'false', E: 'false'},
            'config.int':                {A: 'false', B: 'false', C: 'true',  D: 'false', E: 'true'},
            'config.ru':                 {A: 'true',  B: 'true',  C: 'false', D: 'true',  E: 'false'},
            'config.optimization':       {A: 'true',  B: 'true',  C: 'true',  D: 'true',  E: 'true'},
