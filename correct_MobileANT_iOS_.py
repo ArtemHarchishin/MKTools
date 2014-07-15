@@ -37,8 +37,8 @@ configs = {
 		D: "'ipa-test-interpreter'"},
 	}
 
-working_path = "D:\\Projects\\zombieranch\\front_end"
-program_path = "D:\\Projects\\zombieranch\\front_end\\src\\MKTools"
+working_path = "D:\\Projects\\zombieranch\\front_end_mobile"
+program_path = "D:\\Projects\\zombieranch\\front_end_mobile\\src\\MKTools"
 
 if not os.path.exists(working_path):
     print "[ERROR] Incorrect working path '" + working_path + "'"
