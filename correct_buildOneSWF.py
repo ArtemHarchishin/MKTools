@@ -40,8 +40,8 @@ if os.stat(file_path).st_size == 0:
     print "[ERROR] File '" + file_path + "' is empty!"
     exit()
 
-configs = {'config.debug':              {A: 'true',  B: 'true',  C: 'true',  D: 'true',  E: 'true'},
-           'prop.debug':                {A: 'true',  B: 'true',  C: 'true',  D: 'true',  E: 'true'},
+configs = {'config.debug':              {A: 'true',  B: 'false',  C: 'false',  D: 'false',  E: 'false'},
+           'prop.debug':                {A: 'true',  B: 'false',  C: 'false',  D: 'false',  E: 'false'},
            'config.mobile':             {A: 'true',  B: 'true',  C: 'true',  D: 'true',  E: 'true'},
            'config.web':                {A: 'false', B: 'false', C: 'false', D: 'false', E: 'false'},
            'config.android':            {A: 'true',  B: 'false', C: 'false', D: 'false', E: 'false'},

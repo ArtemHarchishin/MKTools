@@ -14,30 +14,38 @@
         <ant antfile="${basedir}\buildOneSWF.xml" target="build All : debug"/>
     </target>
 
-    <target name="ru_ios_with_emul" depends="py_script_ru_fast">
-        <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
-            <arg value="${basedir}\src\MKTools\${file_name_buildOneSWF}"/>
-            <arg value="ru_ios"/>
-        </exec>
+    <target name="ru_ios_with_emul" depends="py_script_ru_with_emul, py_script_ru_fast">
         <ant antfile="${basedir}\buildOneSWF.xml" target="copy_to_bin_debug"/>
         <ant antfile="${basedir}\buildOneSWF.xml" target="build All : debug"/>
         <ant antfile="${basedir}\MobileANT_iOS_ru.xml" target="main"/>
     </target>
 
-    <target name="int_ios_with_emul" depends="py_script_int_fast">
+    <target name="py_script_ru_with_emul">
         <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
             <arg value="${basedir}\src\MKTools\${file_name_buildOneSWF}"/>
-            <arg value="int_ios"/>
+            <arg value="ru_ios"/>
         </exec>
+    </target>
+
+    <target name="int_ios_with_emul" depends="py_script_int_with_emul, py_script_int_fast">
         <ant antfile="${basedir}\buildOneSWF.xml" target="copy_to_bin_debug"/>
         <ant antfile="${basedir}\buildOneSWF.xml" target="build All : debug"/>
         <ant antfile="${basedir}\MobileANT_iOS_int.xml" target="main"/>
     </target>
 
-    <target name="ru_ios_non_emulate" depends="py_script_ru_fast, py_script_ru_ios_non_emulate, compile_ru">
+    <target name="py_script_int_with_emul">
+        <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
+            <arg value="${basedir}\src\MKTools\${file_name_buildOneSWF}"/>
+            <arg value="int_ios"/>
+        </exec>
     </target>
 
-    <target name="int_ios_non_emulate" depends="py_script_int_fast, py_script_int_ios_non_emulate, compile_int">
+    <target name="ru_ios_non_emulate" 
+            depends="py_script_ru_fast, py_script_ru_ios_non_emulate, compile_ru">
+    </target>
+
+    <target name="int_ios_non_emulate"
+            depends="py_script_int_fast, py_script_int_ios_non_emulate, compile_int">
     </target>
 
     <target name="ru_ios_non_emulate_non_fast"
@@ -46,6 +54,14 @@
 
     <target name="int_ios_non_emulate_non_fast"
             depends="py_script_int_non_fast, py_script_int_ios_non_emulate, compile_int">
+    </target>
+
+    <target name="ru_ios_with_emul_non_fast" 
+            depends="py_script_ru_non_fast, py_script_ru_with_emul, compile_ru">
+    </target>
+
+    <target name="int_ios_with_emul_non_fast" 
+            depends="py_script_int_non_fast, py_script_int_with_emul, compile_int">
     </target>
 
     <target name="compile_ru">
