@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="mktools_config_runner" basedir="D:\Projects\zombieranch\front_end_mobile" default="desktop">
+<project name="mktools_config_runner" basedir="D:\Projects\zombieranch\front_end_mobile" default="desktop_ru">
 
     <property environment="env"/>
     <property name="file_name_buildOneSWF" value="correct_buildOneSWF.py"/>
     <property name="file_name_MobileANT_iOS" value="correct_MobileANT_iOS_.py"/>
 
-    <target name="desktop">
+    <target name="desktop_ru">
         <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
             <arg value="${basedir}\src\MKTools\${file_name_buildOneSWF}"/>
-            <arg value="desktop"/>
+            <arg value="desktop_ru"/>
+        </exec>
+        <ant antfile="${basedir}\buildOneSWF.xml" target="copy_to_bin_debug"/>
+        <ant antfile="${basedir}\buildOneSWF.xml" target="build All : debug"/>
+    </target>
+
+    <target name="desktop_int">
+        <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
+            <arg value="${basedir}\src\MKTools\${file_name_buildOneSWF}"/>
+            <arg value="desktop_int"/>
         </exec>
         <ant antfile="${basedir}\buildOneSWF.xml" target="copy_to_bin_debug"/>
         <ant antfile="${basedir}\buildOneSWF.xml" target="build All : debug"/>
