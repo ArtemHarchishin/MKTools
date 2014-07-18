@@ -5,6 +5,9 @@
     <property name="file_name_buildOneSWF" value="correct_buildOneSWF.py"/>
     <property name="file_name_MobileANT_iOS" value="correct_MobileANT_iOS_.py"/>
 
+
+    <!-- desktop -->
+
     <target name="desktop_ru">
         <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
             <arg value="${basedir}\src\MKTools\${file_name_buildOneSWF}"/>
@@ -23,7 +26,16 @@
         <ant antfile="${basedir}\buildOneSWF.xml" target="build All : debug"/>
     </target>
 
-    <target name="ru_ios_with_emul" depends="py_script_ru_with_emul, py_script_ru_fast">
+
+    <!-- iOS with emulator -->
+
+    <target name="ru_ios_with_emul_debug" depends="py_script_ru_with_emul, py_script_ru_fast_debug">
+        <ant antfile="${basedir}\buildOneSWF.xml" target="copy_to_bin_debug"/>
+        <ant antfile="${basedir}\buildOneSWF.xml" target="build All : debug"/>
+        <ant antfile="${basedir}\MobileANT_iOS_ru.xml" target="main"/>
+    </target>
+
+    <target name="ru_ios_with_emul_test" depends="py_script_ru_with_emul, py_script_ru_fast_test">
         <ant antfile="${basedir}\buildOneSWF.xml" target="copy_to_bin_debug"/>
         <ant antfile="${basedir}\buildOneSWF.xml" target="build All : debug"/>
         <ant antfile="${basedir}\MobileANT_iOS_ru.xml" target="main"/>
@@ -36,7 +48,13 @@
         </exec>
     </target>
 
-    <target name="int_ios_with_emul" depends="py_script_int_with_emul, py_script_int_fast">
+    <target name="int_ios_with_emul_debug" depends="py_script_int_with_emul, py_script_int_fast_debug">
+        <ant antfile="${basedir}\buildOneSWF.xml" target="copy_to_bin_debug"/>
+        <ant antfile="${basedir}\buildOneSWF.xml" target="build All : debug"/>
+        <ant antfile="${basedir}\MobileANT_iOS_int.xml" target="main"/>
+    </target>
+
+    <target name="int_ios_with_emul_test" depends="py_script_int_with_emul, py_script_int_fast_test">
         <ant antfile="${basedir}\buildOneSWF.xml" target="copy_to_bin_debug"/>
         <ant antfile="${basedir}\buildOneSWF.xml" target="build All : debug"/>
         <ant antfile="${basedir}\MobileANT_iOS_int.xml" target="main"/>
@@ -49,29 +67,65 @@
         </exec>
     </target>
 
-    <target name="ru_ios_non_emulate" 
-            depends="py_script_ru_fast, py_script_ru_ios_non_emulate, compile_ru">
+
+    <!-- iOs without emulator -->
+
+    <target name="ru_ios_non_emulate_debug" 
+            depends="py_script_ru_fast_debug, py_script_ru_ios_non_emulate, compile_ru">
     </target>
 
-    <target name="int_ios_non_emulate"
-            depends="py_script_int_fast, py_script_int_ios_non_emulate, compile_int">
+    <target name="int_ios_non_emulate_debug"
+            depends="py_script_int_fast_debug, py_script_int_ios_non_emulate, compile_int">
     </target>
 
-    <target name="ru_ios_non_emulate_non_fast"
-            depends="py_script_ru_non_fast, py_script_ru_ios_non_emulate, compile_ru">
+    <target name="ru_ios_non_emulate_test" 
+            depends="py_script_ru_fast_test, py_script_ru_ios_non_emulate, compile_ru">
     </target>
 
-    <target name="int_ios_non_emulate_non_fast"
-            depends="py_script_int_non_fast, py_script_int_ios_non_emulate, compile_int">
+    <target name="int_ios_non_emulate_test"
+            depends="py_script_int_fast_test, py_script_int_ios_non_emulate, compile_int">
     </target>
 
-    <target name="ru_ios_with_emul_non_fast" 
-            depends="py_script_ru_non_fast, py_script_ru_with_emul, compile_ru">
+
+    <!-- iOs with emulator not fast -->
+
+    <target name="ru_ios_with_emul_non_fast_debug" 
+            depends="py_script_ru_non_fast_debug, py_script_ru_with_emul, compile_ru">
     </target>
 
-    <target name="int_ios_with_emul_non_fast" 
-            depends="py_script_int_non_fast, py_script_int_with_emul, compile_int">
+    <target name="int_ios_with_emul_non_fast_debug" 
+            depends="py_script_int_non_fast_debug, py_script_int_with_emul, compile_int">
     </target>
+
+    <target name="ru_ios_with_emul_non_fast_test" 
+            depends="py_script_ru_non_fast_test, py_script_ru_with_emul, compile_ru">
+    </target>
+
+    <target name="int_ios_with_emul_non_fast_test" 
+            depends="py_script_int_non_fast_test, py_script_int_with_emul, compile_int">
+    </target>
+
+    
+    <!-- iOs without emulator not fast -->
+
+    <target name="ru_ios_non_emulate_non_fast_test"
+            depends="py_script_ru_non_fast_test, py_script_ru_ios_non_emulate, compile_ru">
+    </target>
+
+    <target name="int_ios_non_emulate_non_fast_test"
+            depends="py_script_int_non_fast_test, py_script_int_ios_non_emulate, compile_int">
+    </target>
+
+     <target name="ru_ios_non_emulate_non_fast_debug"
+            depends="py_script_ru_non_fast_debug, py_script_ru_ios_non_emulate, compile_ru">
+    </target>
+
+    <target name="int_ios_non_emulate_non_fast_debug"
+            depends="py_script_int_non_fast_debug, py_script_int_ios_non_emulate, compile_int">
+    </target>
+   
+
+    <!-- Scripts assistants    -->
 
     <target name="compile_ru">
         <ant antfile="${basedir}\buildOneSWF.xml" target="copy_to_bin_debug"/>
@@ -85,31 +139,62 @@
         <ant antfile="${basedir}\MobileANT_iOS_int.xml" target="main"/>
     </target>
 
-    <target name="py_script_ru_fast">
+
+    <!-- Py-scripts assistants    -->
+
+    <target name="py_script_int_non_fast_debug">
         <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
             <arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
-            <arg value="fast_compile_ru"/>
+            <arg value="not_fast_compile_int_debug"/>
         </exec>
     </target>
 
-    <target name="py_script_int_non_fast">
+    <target name="py_script_ru_non_fast_debug">
         <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
             <arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
-            <arg value="not_fast_compile_int"/>
+            <arg value="not_fast_compile_ru_debug"/>
         </exec>
     </target>
 
-    <target name="py_script_ru_non_fast">
+    <target name="py_script_int_fast_debug">
         <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
             <arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
-            <arg value="not_fast_compile_ru"/>
+            <arg value="fast_compile_int_debug"/>
         </exec>
     </target>
 
-    <target name="py_script_int_fast">
+    <target name="py_script_ru_fast_debug">
         <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
             <arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
-            <arg value="fast_compile_int"/>
+            <arg value="fast_compile_ru_debug"/>
+        </exec>
+    </target>
+
+    <target name="py_script_int_non_fast_test">
+        <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
+            <arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
+            <arg value="not_fast_compile_int_test"/>
+        </exec>
+    </target>
+
+    <target name="py_script_ru_non_fast_test">
+        <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
+            <arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
+            <arg value="not_fast_compile_ru_test"/>
+        </exec>
+    </target>
+
+    <target name="py_script_int_fast_test">
+        <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
+            <arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
+            <arg value="fast_compile_int_test"/>
+        </exec>
+    </target>
+
+    <target name="py_script_ru_fast_test">
+        <exec executable="${env.PYTHON_HOME}/python.exe" errorproperty="err">
+            <arg value="${basedir}\src\MKTools\${file_name_MobileANT_iOS}"/>
+            <arg value="fast_compile_ru_test"/>
         </exec>
     </target>
 

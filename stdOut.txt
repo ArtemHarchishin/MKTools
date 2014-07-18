@@ -1,0 +1,3 @@
+List of attached devices:
+Handle	DeviceClass	DeviceUUID					DeviceName
+  10	iPad    	0a69b39bfbba725b056188246c7f19e768479fbd	iPad xap       

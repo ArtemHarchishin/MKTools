@@ -42,7 +42,7 @@ if os.stat(file_path).st_size == 0:
     exit()
 
 configs = {'config.debug':              {A: 'true',  B: 'true',   C: 'true',   D: 'true',   E: 'true',  F: 'true'},
-           'prop.debug':                {A: 'true',  B: 'false',  C: 'false',  D: 'false',  E: 'false', F: 'true'},
+           'prop.debug':                {A: 'true',  B: 'true',   C: 'true',   D: 'true',   E: 'true',  F: 'true'},
            'config.mobile':             {A: 'true',  B: 'true',   C: 'true',   D: 'true',   E: 'true',  F: 'true'},
            'config.web':                {A: 'false', B: 'false',  C: 'false',  D: 'false',  E: 'false', F: 'false'},
            'config.android':            {A: 'true',  B: 'false',  C: 'false',  D: 'false',  E: 'false', F: 'true'},
