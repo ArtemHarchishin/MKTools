@@ -19,7 +19,24 @@ F = 'fast_compile_ru_test'
 G = 'not_fast_compile_int_test'
 H = 'not_fast_compile_ru_test'
 
-build_config = sys.argv[1] 
+build_config = sys.argv[1]
+
+debug_instrument_type = '-listen'
+debug_instrument = debug_instrument_type + ' 7936'
+
+try:
+
+    # arg = sys.argv[2]
+    arg = '-c'
+    if arg == '-l':
+        debug_instrument_type = '-listen'
+        debug_instrument = debug_instrument_type + ' 7936'
+    elif arg == '-c':
+        debug_instrument_type = '-connect'
+        debug_instrument = debug_instrument_type + ' 192.168.0.100'
+
+except Exception, e:
+    pass
 
 if build_config not in {A, B, C, D, E, F, G, H}:
     print "[WARNING] No have config settings with name '" + build_config + "'"
@@ -68,9 +85,11 @@ if os.stat(file_path).st_size == 0:
     print "[ERROR] File '" + file_path + "' is empty!"
     exit()
 
-need = True
+need_add = True
 get_next = False
 next_arg = None
+test_configs = {E, F, G, H}
+can_out_from_cycle = False
 
 with open(file_path, 'r') as f:
     dom = parse(f)
@@ -81,6 +100,7 @@ with open(file_path, 'r') as f:
                 if get_next:
                     next_arg = arg
                     get_next = False
+                    can_out_from_cycle = True
 
                 attribute = arg.getAttribute('line')
                 if attribute.find('-package -target') == 0:
@@ -88,13 +108,25 @@ with open(file_path, 'r') as f:
                     arg.setAttribute('line', '-package -target ' + configs['type'][build_config])
                     print '[' + attribute + '] ===> [' + arg.getAttribute('line') + ']'
 
-                if attribute.find('-listen') == 0:
-                    need = False
+                if build_config in test_configs and (attribute.find('-listen') == 0 or attribute.find('-connect') == 0):
+                    need_add = False
+                    arg.setAttribute('line', '')
+                    print 'For element <arg/> set attribute line=""'
+                    if can_out_from_cycle:
+                        break
 
-if need:
+                elif build_config not in test_configs and (attribute.find('-listen') == 0 or attribute.find('-connect') == 0 or attribute == ''):
+                    need_add = False
+                    arg.setAttribute('line', debug_instrument)
+                    print 'For element <arg/> set attribute line="' + debug_instrument + '"'
+                    if can_out_from_cycle:
+                        break
+
+if need_add:
     new_element = dom.createElement('arg')
     exec_node.insertBefore(new_element, next_arg)
-    new_element.setAttribute('line', '-listen 7936')
+    new_element.setAttribute('line', debug_instrument)
+    print 'Added new element <arg/> with attribute line="' + debug_instrument + '"'
 
 import codecs
 
