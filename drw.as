@@ -3,6 +3,10 @@ import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;
 import flash.text.TextField;
 
+/*
+* {x: 0, y:0, width: 0, height: 0, parent: null}
+ */
+
 public function drw(o:Object):Object {
     if (!o.parent) return {};
 
@@ -25,7 +29,8 @@ public function drw(o:Object):Object {
         if (!(o is TextField)) return {};
         o = (o as TextField).parent;
     }
-    o.addChild(center);
+	if (o.hasOwnProperty('addChild'))
+	    o.addChild(center);
 
     result.border = border;
     result.center = center;
