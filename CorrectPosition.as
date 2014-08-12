@@ -32,24 +32,28 @@ package MKTools
 			left.addEventListener(TouchEvent.TOUCH, onLeft);
 			left.x = height;
 			left.y = height * 2;
+			left.alpha = 0.5;
 			addChild(left);
 
 			var top:Quad = new Quad(width, height, 0xff0000);
 			top.addEventListener(TouchEvent.TOUCH, onTop);
 			top.x = height * 2;
 			top.y = height;
+			top.alpha = 0.5;
 			addChild(top);
 
 			var right:Quad = new Quad(width, height, 0x0000ff);
 			right.addEventListener(TouchEvent.TOUCH, onRight);
 			right.x = height * 3;
 			right.y = height * 2;
+			right.alpha = 0.5;
 			addChild(right);
 
 			var down:Quad = new Quad(width, height, 0xffff00);
 			down.addEventListener(TouchEvent.TOUCH, onDown);
 			down.x = height * 2;
 			down.y = height * 2;
+			down.alpha = 0.5;
 			addChild(down);
 		}
 
