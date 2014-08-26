@@ -7,7 +7,7 @@ package MKTools
 	public class MyTxtBtn extends TextField
 	{
 		private var _clicked:Function;
-
+		const size:int = 12;
 		public function MyTxtBtn(clicked:Function, text:String)
 		{
 			_clicked = clicked;
@@ -21,7 +21,7 @@ package MKTools
 
 			this.text = text;
 			//"Arial"
-			this.setTextFormat(new TextFormat(null, 12, 0x999999, true));
+			this.setTextFormat(new TextFormat(null, size, 0x999999, true));
 			//this.embedFonts = true;
 			this.autoSize = "left";
 			this.mouseEnabled = true;
@@ -42,13 +42,13 @@ package MKTools
 		public function highlight(e:MouseEvent = null):void
 		{
 			//"Arial"
-			this.setTextFormat(new TextFormat(null, 12, 0xffffff, true));
+			this.setTextFormat(new TextFormat(null, size, 0xffffff, true));
 		}
 
 		public function lowlight(e:MouseEvent = null):void
 		{
 			//"Arial"
-			this.setTextFormat(new TextFormat(null, 12, 0x999999, true));
+			this.setTextFormat(new TextFormat(null, size, 0x999999, true));
 		}
 
 	}
